@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Player</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lastEditionStyle.css" type="text/css">
+  <script src="https://kit.fontawesome.com/0fd8fbc1b6.js" crossorigin="anonymous"></script>
+  
+<style>
+  body{
+    margin:0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #ffb399;
+    font-family: 'Poppins', sans-serif;
+}
+button{
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+.music-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.music-content{
+    position: relative;
+    width: 245px;
+    height: 450px;
+    background-color: #000;
+    border-width: 8px 4px !important;
+    border: solid;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(0, 0,0 , .52);
+}
+#bg-image img{
+    width: 105%;
+    height: 105%;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    filter: blur(6px);
+    -webkit-filter: blur(5px);
+}
+#blackLayer{
+    height: 450px;
+    width: 100%;
+    background-color: rgba(0, 0,0 , .404);
+    position: absolute;
+    z-index: 2;
+}
+#menu{
+    position: relative;
+    z-index: 3;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#menu img{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+#volume-container{
+    position: relative;
+    width: 100%;
+    height: 15px;
+    z-index: 3;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+#volume-container img{
+
+    width: 16px;
+    height: 16px;
+    margin: 0 5px;
+}
+.slider{
+    width: 110px;
+    height: 1px !important;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 100;
+    outline: none;
+    position: relative;
+}
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width:10px;
+    height: 10px;
+    background-color: #e62c2f;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    transform: scale(1);
+}
+.slider:active::-webkit-slider-thumb{
+    transform: scale(1.2);
+}
+#music-image{
+    position:relative;
+    width: 100%;
+    height: 215px;
+    z-index: 3;
+}
+#circle-image{
+    position: absolute;
+    top: -33%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 120px;
+    height: 120px;
+    background-color:  #000;
+    border-radius: 50%;
+    border: 5px solid rgba(221,221,221,0.897);
+    overflow: hidden;
+}
+#music-image img{
+    width:100%;
+    height:100%;
+}
+#music-title{
+    position: relative;
+    padding: 0 25px;
+    top: 65%;
+    color: #fff;
+}
+#music-title h5{
+    color: #fff;
+    font-size: 20px;
+    margin: 20px 0 5px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.2;
+}
+#music-title h6{
+    margin: 0;
+    font-size: 12.5px;
+    text-align: center;
+    font-weight: 400;
+}
+#music-menu{
+    width: 90%;
+    height: 40px;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+#music-menu img{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+#currentTime{
+    position: relative;
+    z-index: 3;
+    padding: 0 12px 5px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+#currentTime span{
+    font-size: 12px;
+}
+.seekslider{
+    width: 100px;
+    height: 2px !important;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index:3;
+    outline: none;
+    position: fixed;
+    margin-left: 70px;
+}
+.seekslider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    width:10px;
+    height: 10px;
+    background-color: #e62c2f;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    transform: scale(1);
+}
+.seekslider:active::-webkit-slider-thumb{
+    transform: scale(1.2);
+}
+#buttons{
+    position: relative;
+    width:100%;
+    height: 50px;
+    z-index: 3;
+    margin-top: 20px;
+}
+#buttons  div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.play{
+    width: 60px;
+    height: 50px;
+    margin: 0 5px;
+}
+.play img{
+    width: 100%;
+    height: 100%;
+}
+.pre img,
+.next img{
+    width: 20px;
+    height: 20px;
+}
+#buttons .like{
+    position: absolute;
+    top: 25%;
+    right: 8%;
+    cursor:pointer;
+}
+#buttons .like i{ 
+    color:rgba(255, 255,255 , 0.883);
+}
+#buttons .repeat{
+    position: absolute;
+    top: 30%;
+    left: 6%;
+    font-size: 15px;
+    cursor: pointer;
+}
+#repeat img{
+    width:16px;
+    height: 16px;
+}
+
+
+
+</style>
+  </head> 
+<body>
+
+<div class="music-container">
+  <div class="music-content">
+    <div id="bg-image">
+      <div id="blackLayer"></div>
+      <img src="images/sea-bts.jpg" alt="" id="bgImage">
+    </div>
+    <div id="menu">
+      <img src="images/menu.png" alt="">
+      <img src="images/search.png" alt="">
+    </div>
+    <div id="volume-container">
+      <img src="images/volume-low.png" alt="" id="volumn-down">
+      <input type="range" class="slider" id="volumeslider" min="0" max="100" value="100" step="1">
+      <img src="images/volume-high.png" alt="" id="volumn-up">
+    </div>
+    <div id="music-image">
+      <div id="circle-image">
+        <img src="images/sea-bts.jpg" alt="" id="image">
+      </div>
+      <div id="music-title">
+        <h5 id="playlist_status"></h5>
+        <h6 id="playlist_artist"></h6>
+      </div>
+    </div>
+    <div id="music-menu">
+      <button id="random"><img src="images/shuffle.png" alt=""></button>
+      <button class="mute" id="mutebtn"><img src="images/speaker.png" alt=""></button>
+   </div>
+   <div id="currentTime">
+       <span id="curtimetext">00:00</span>
+       <span id="durtimetext">00:00</span>
+   </div>
+   <input type="range" class="seekslider" id="seekslider" min="0" max="100" value="0" step="1">
+   <div id="buttons">
+       <button class="repeat" id="repeat"><img src="images/repeat.png" alt=""></button>
+       <div>
+           <button class="pre" id="prevbtn"><img src="images/backward.png" alt="">
+           </button>
+           <button class="play" id="playpausebtn"><img src="images/play-red.png" alt="">
+           </button>
+           <button class="next" id="nextbtn"><img src="images/forward.png" alt="">
+           </button>
+       </div>
+       <span class="like">
+           <i class="far fa-heart" aria-hidden="true"></i>
+           </span>
+   </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="main.js"></script>
+<script>
+  let audio, playbtn, title, poster, artists, mutebtn, seekslider, volumeslider, seeking=false, seekto, 
+curtimetext, durtimetext,
+playlist_status, dir, playlist, ext, agent, playlist_artist, repeat, randomSong;
+
+dir="music/";
+playlist=["sea", "send my love"];
+title=["sea", "send my love"];
+artists=["BTS", "Adele"];
+poster=["images/sea-bts.jpg", "images/send-adele.png"];
+
+ext = ".mp3";
+agent = navigator.userAgent.toLowerCase();
+if (agent.indexOf('firefox') != -1 || agent.indexOf('opera') != -1){
+    ext= ".ogg";
+}
+
+playbtn= document.getElementById("playpausebtn");
+nextbtn= document.getElementById("nextbtn");
+prevbtn= document.getElementById("prevbtn");
+mutebtn= document.getElementById("mutebtn");
+seekslider= document.getElementById("seekslider");
+volumeslider= document.getElementById("volumeslider");
+curtimetext= document.getElementById("curtimetext");
+durtimetext= document.getElementById("durtimetext");
+playlist_status= document.getElementById("playlist_status");
+playlist_artist=document.getElementById("playlist_artist");
+repeat= document.getElementById("repeat");
+randomSong= document.getElementById("random");
+
+playlist_index = 0;
+
+audio=new Audio();
+audio.src= dir + playlist[0]+ ext;
+audio.loop= false;
+
+playlist_status.innerHTML= title[playlist_index];
+playlist_artist.innerHTML = artists[playlist_index];
+
+playbtn.addEventListener("click", playPause);
+nextbtn.addEventListener("click", nextSong);
+prevbtn.addEventListener("click", prevSong);
+mutebtn.addEventListener("click", mute);
+seekslider.addEventListener("mousedown", function(event){seeking=true;
+seek(event); });
+seekslider.addEventListener("mousemove", function(event){seek(event); });
+seekslider.addEventListener("mouseup", function(event){seeking= false; });
+volumeslider.addEventListener("mousemove", setvolume);
+audio.addEventListener("timeupdate", function() {seektimeupdate(); });
+audio.addEventListener("ended", function(){ switchTrack(); });
+repeat.addEventListener("click", loop);
+randomSong.addEventListener("click", random);
+
+function fetchMusicDetails(){
+    $("#playpausebtn img").attr("src", "images/pause-red.png");
+    $("#bgImage").attr("src", poster[playlist_index]);
+    $("#image").attr("src", poster[playlist_index]);
+
+    playlist_status.innerHTML= title[playlist_index];
+    playlist_artist.innerHTML= artists[playlist_index];
+
+    audio.src= dir+ playlist[playlist_index]+ext;
+    audio.play();
+}
+function playPause(){
+    if (audio.paused){
+        audio.play();
+        $("#playpausebtn img").attr("src", "images/pause-red.png");
+    }else{
+        audio.pause();
+        $("#playpausebtn img").attr("src", "images/play-red.png");
+    }
+}
+function nextSong(){
+    playlist_index++;
+    if (playlist_index > playlist.length-1){
+        playlist_index = 0;
+    }
+    fetchMusicDetails();
+}
+function prevSong(){
+    playlist_index--;
+    if (playlist_index < 0){
+        playlist_index = playlist.length - 1;
+    }
+    fetchMusicDetails();
+}
+function mute(){
+    if (audio.muted){
+        audio.muted = false;
+        $("#mutebtn img").attr("src", "images/speaker.png");
+    }
+    else{
+        audio.muted= true;
+        $("#mutebtn img").attr("src", "images/mute.png");
+    }
+}
+function seek(event){
+    if(audio.duration ==0){
+        null
+    }else{
+        if(seeking){
+            seekslider.value= event.clientX - seekslider.offsetLeft;
+            seekto = audio.duration * (seekslider.value / 100);
+            audio.currentTime = seekto;
+        }
+    }
+}
+function setvolume(){
+    audio.volume= volumeslider.value/100;
+}
+function seektimeupdate(){
+    if(audio.duration){
+        let nt= audio.currentTime * (100/ audio.duration);
+        seekslider.value = nt;
+        var curmins= Math.floor(audio.currentTime /60);
+        var cursecs=Math.floor(audio.currentTime - curmins*60);
+        var durmins = Math.floor(audio.duration /60);
+        var dursecs= Math.floor(audio.duration - durmins *60);
+        if(cursecs<10){cursecs ="0"+ cursecs}
+        if(dursecs<10){dursecs ="0"+ dursecs}
+        if(curmins<10){curmins ="0"+ curmins};
+        if(durmins<10){durmins ="0"+ durmins};
+        curtimetext.innerHTML = curmins + ":"+ cursecs;
+        durtimetext.innerHTML = durmins +":" + dursecs;
+    }else{
+        curtimetext.innerHTML = "00" + ":"+ "00";
+        durtimetext.innerHTML = "00" + ":" + "00";
+    }
+}
+function switchTrack(){
+    if (playlist_index == (playlist.length -1)){
+        playlist_index = 0;
+    }else{
+        playlist_index++;
+    }
+    fetchMusicDetails();
+}
+function loop(){
+    if(audio.loop){
+        audio.loop = false;
+        $("#repeat img").attr("src", "images/repeat.png");
+    }else{
+        audio.loop = true;
+        $("#repeat img").attr("src", "images/rep1.png");
+    }
+}
+function getRandomNumber(min, max){
+    let step1= max-min +1;
+    let step2 = Math.random() *step1;
+    let result = Math.floor(step2) + min;
+    return result;
+}
+function random(){
+    let randomIndex = getRandomNumber(0, playlist.length-1);
+    playlist_index = randomIndex;
+    fetchMusicDetails();
+}
+</script>
+</body>
+</html>
+
