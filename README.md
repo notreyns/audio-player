@@ -1,9 +1,9 @@
 # audio-player
-##Enjoy Music!
+## *Enjoy Music!*
 ![](https://imgur.com/dybc6MG.jpg)
-##Responsive application
+## Responsive application
 ![](https://imgur.com/8n8Njel.jpg)
-##our university is not forgotten either
+## our university is not forgotten either
 ![](https://imgur.com/dX2chMv.jpg)
-##Current time and duration
+## Current time and duration
 ![](https://imgur.com/nbKHuat.jpg)
