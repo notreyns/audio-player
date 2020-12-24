@@ -3,10 +3,10 @@ curtimetext, durtimetext,
 playlist_status, dir, playlist, ext, agent, playlist_artist, repeat, randomSong;
 
 dir="music/";
-playlist=["sea", "send my love"];
-title=["sea", "send my love"];
-artists=["BTS", "Adele"];
-poster=["images/sea-bts.jpg", "images/send-adele.png"];
+playlist=["sea", "send my love","yeni-bir-dunya"];
+title=["sea", "send my love", "yeni bir dunya"];
+artists=["BTS", "Adele", "Ogrenciler"];
+poster=["images/sea-bts.jpg", "images/send-adele.png", "images/alatoo.png"];
 
 ext = ".mp3";
 agent = navigator.userAgent.toLowerCase();
